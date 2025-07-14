@@ -1,0 +1,27 @@
+#include "stm32f4xx.h"
+
+/*Tested with ARM Compiler : version 5*/
+
+void systickDelayMs(int n);
+
+int main(void) {
+
+    RCC->AHB1ENR |=  1;             
+    GPIOA->MODER |=  0x800;  
+    GPIOA->AFR[0] |= 0x00100000;    	
+
+    RCC->APB1ENR |= 1;              
+    TIM2->PSC = 1600 - 1;          
+    TIM2->ARR = 10000 - 1;        
+    TIM2->CCMR1 = 0x30;             
+    TIM2->CCR1 = 0;                
+    TIM2->CCER |= 1;               
+    TIM2->CNT = 0;                  
+    TIM2->CR1 = 1;                                 
+
+
+    while (1) {
+  
+    }
+}
+
